@@ -1,6 +1,6 @@
 // import java.util.*;
 
-// class Josephur {
+// class Josephus {
 //     // N persons are sitting on a round table, at every move we kill the kth person,
 //     // initially we start counting from 1st person and after killing the kth person,
 //     // the counting for k will start from k+1th person
@@ -36,7 +36,7 @@
 
 import java.util.*;
 
-public class Josephur {
+public class Josephus {
     public static void main(String[] args) {
         // arr={"Mohit","Ravi","Harsh","Shubham","Himanshu","Abhishek","Kuldeep"};
         ArrayList<String> a = new ArrayList<>();
@@ -47,15 +47,18 @@ public class Josephur {
         a.add("Himanshu");
         a.add("Abhishek");
         a.add("Kuldeep");
-        int i = killPerson(a, 0, 7, 3); // 3rd person
-        System.out.println(a.get(0));
+        int i = killPerson(7, 3); // 3rd person
+        // int i = killPerson(7, 2); // 3rd person
+        System.out.println(a.get(i));
     }
 
-    static int killPerson(ArrayList<String> a, int s, int n, int k) {
+    static int killPerson(int n, int k) {
         if (n == 1) // only 1 person left
-            return n;
-        a.remove((s + k - 1) % n);
-        // System.out.println(a);
-        return killPerson(a, (s + k - 1) % n, n - 1, k);
+            return 0;
+        int x = killPerson(n - 1, k); // recursive call
+        int y = (x + k) % n; // translated address as after killing every person the translate the index,
+        // also when we return the survivor it will be 0 or 1 in last phase , but we
+        // have to re-traslate it to actual index, y expression does that for us
+        return y; // that's how indexes are changed
     }
 }
