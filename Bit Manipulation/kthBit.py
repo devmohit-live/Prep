@@ -1,4 +1,4 @@
-print(unSetKthBit(3, 1))  # will make it 2# getting or setting kth bit of any number
+# getting or setting kth bit of any number
 
 
 def getKthBit(n, k) -> bool:
