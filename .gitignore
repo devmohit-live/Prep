@@ -3,6 +3,7 @@
 # recursion/*.class
 # Log file
 *.log
+*.exe
 
 # BlueJ files
 *.ctxt
