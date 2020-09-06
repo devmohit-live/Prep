@@ -5,6 +5,8 @@
 *.log
 *.exe
 
+.vscode/*
+
 # BlueJ files
 *.ctxt
 
