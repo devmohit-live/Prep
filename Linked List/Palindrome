@@ -1,0 +1,40 @@
+// solution 1
+    private boolean palindromeHelper(Node node){
+        if(node==null) return true;
+        
+        boolean status = palindromeHelper(node.next);
+        if(status == false) return false; //extreme and null pointers
+        else if(rleft.data!=node.data){
+            return false;
+        }else{
+            rleft=rleft.next;
+            return true;
+        }
+    }
+
+    //solution 2
+    private boolean palindromeHelper(Node node,int floor){
+        if(node==null) return true;
+        
+        boolean status = palindromeHelper(node.next,floor +1);
+        if(status == false) return false; //extreme and null pointers
+        else if(floor>= size/2){
+           if(rleft.data==node.data){
+               rleft=rleft.next;
+               return true;
+           }
+           else{
+               return false;
+           }
+        }
+        return true;
+    }
+    
+    Node rleft;
+    public boolean IsPalindrome() {
+      rleft=head;
+      boolean status = palindromeHelper(head);
+    //   boolean status = palindromeHelper(head,0);
+      return status;
+    }
+  }
