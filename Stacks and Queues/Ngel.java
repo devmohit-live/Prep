@@ -24,7 +24,7 @@ public class Ngel {
             }
             s.push(i);
         }
-        // elements left on the stack having no right greater elements
+        // elements left on the stack having no LEFT greater elements
         while (s.size() > 0) {
             nge[s.peek()] = -1;
             s.pop();

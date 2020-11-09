@@ -18,7 +18,7 @@ public class Nsel {
         }
         Stack<Integer> s = new Stack<>();
         s.push(n - 1); // pushing first index
-        for (int i = n - 1; i >= 0; i--) {
+        for (int i = n - 2; i >= 0; i--) {
             while (s.size() > 0 && a[i] <= a[s.peek()]) {
                 int pos = s.peek();
                 nse[pos] = a[i];
