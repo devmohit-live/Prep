@@ -1,0 +1,26 @@
+import java.io.*;
+import java.util.*;
+public class Main
+{
+	public static void main(String[] args)throws IOException {
+	    BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
+	    String[]s =br.readLine().split(" ");
+	    float inp[]=new float[s.length];
+	    for(int i=0;i<s.length;i++){
+	        inp[i]=Float.parseFloat(s[i]);
+	    }
+	    Arrays.sort(inp);
+	    ArrayList<Float> res=new ArrayList<>();
+	    int count=1;
+	    for(int i=s.length -1 ;i>=0;i--){
+	        if(inp[i]>0 && inp[i]<42.69){
+	            res.add(inp[i]);
+	            count++;
+	        }
+	        if(count>3){
+	            break;
+	        }
+	    }
+		System.out.println(res);
+	}
+}
