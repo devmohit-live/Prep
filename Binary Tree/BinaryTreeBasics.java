@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class Basic {
+public class BinaryTreeBasics {
     static class Node {
         int val;
         Node left;
@@ -78,14 +78,20 @@ public class Basic {
     }
 
     public static void main(String[] args) {
-        Integer arr2[] = { 19, 50, 25, 12, null, null, 37, 30, null, null, null, 75, 62, null, 70, null, null, 87, null,
-                null };
-        Integer arr[] = { 50, 25, 12, null, null, 37, 30, null, null, null, 75, 62, null, 70, null, null, 87, null,
-                null };
+        Integer arr[] = { 50, 25, 12, null, null, 37, 30, null, null, 51, null, null, 75, 62, 60, null, null, 70, null,
+                null, 87, null, null };
         Node root = construct(arr);
-        Node root2 = construct(arr);
         dispaly(root);
-        System.out.println("********************");
-        dispaly(root2);
+        // Integer arr2[] = { 19, 50, 25, 12, null, null, 37, 30, null, null, null, 75,
+        // 62, null, 70, null, null, 87, null,
+        // null };
+        // Integer arr[] = { 50, 25, 12, null, null, 37, 30, null, null, null, 75, 62,
+        // null, 70, null, null, 87, null,
+        // null };
+        // Node root = construct(arr);
+        // Node root2 = construct(arr);
+        // dispaly(root);
+        // System.out.println("********************");
+        // dispaly(root2);
     }
 }

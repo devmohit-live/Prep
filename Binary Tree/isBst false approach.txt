@@ -1,0 +1,50 @@
+Here there is only comparison between immediate nodes so there is a high possibility that a tree is node bSt => left<=node<right
+but not a tree bst => there is a elment is left or right sub-tree that is violateing the rule:
+right-subtree: contains elment 77 > 75(present grandparent) but it satisfoes it subtree as 60< 62< 77:  
+
+                                50
+                     /                     \
+                    25                       75
+                  /     \                /        \
+                12       37             62         87
+                        /  \           /     \
+                       30  40         60     77
+
+
+Solution :  maintiann the min and max of subtrees(bottom -up) so as to check for SubtreeBst Property   
+
+so isBST =>  isNodeBst== true and isSubtreeBst == true; for every node
+
+
+
+
+
+
+
+
+ public static boolean isBST(Node node){
+        //another example at 50 25 12 n n 37 30 n n 51 n n 75 62 60 n n 70 n n 87 n n
+
+
+        if(node==null) return true;
+        
+        int ld = node.left!=null?node.left.data: node.data-1; 
+        int rd = node.right!=null?node.right.data: node.data+1; // as right must be greater that node.data while left can be less and equal
+        
+        if(ld > node.data || rd<node.data){
+            return false;
+        }
+        
+        else{
+            //left subtree
+            if(isBST(node.left)==false){
+                return false;
+            }
+            //right subtree
+            if(isBST(node.right)==false){
+                return false;
+            }
+        }
+        
+        return true;
+    }
