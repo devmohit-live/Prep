@@ -1,7 +1,7 @@
 import java.io.*;
 import java.util.*;
 
-public class IsBalanced {
+public class Diameter {
     public static class Node {
         int data;
         Node left;
@@ -79,42 +79,51 @@ public class IsBalanced {
         display(node.right);
     }
 
-    static boolean is_balanced = true;
+    public static int height(Node node) {
+        if (node == null) {
+            return -1;
+        }
 
-    public static int balHeight(Node node) {
+        int lh = height(node.left);
+        int rh = height(node.right);
+
+        int th = Math.max(lh, rh) + 1;
+        return th;
+    }
+
+    public static int diameter1(Node node) {
         if (node == null)
             return 0;
 
-        int lh = balHeight(node.left);
-        int rh = balHeight(node.right);
-
-        if (Math.abs(lh - rh) > 1)
-            is_balanced = false;
-        // ternary not working here
-        // is_balanced = Math.abs(lh-rh) > 1 ? false:true;
-
-        return Math.max(lh, rh) + 1;
+        int ld = diameter1(node.left);
+        int rd = diameter1(node.right);
+        int factor = height(node.left) + height(node.right) + 2; // O(N)
+        return Math.max(Math.max(ld, rd), factor);
     }
 
-    static class Bpair {
+    static class DiaPair {
+        int dia;
         int height;
-        boolean isBal;
     }
 
-    static Bpair isBal(Node node) {
+    public static DiaPair diameterBetter(Node node) {
         if (node == null) {
-            Bpair base = new Bpair();
-            base.height = 0;
-            base.isBal = true;
-            return base;
+            DiaPair bs = new DiaPair();
+            bs.height = -1;
+            bs.dia = 0;
+            return bs;
         }
 
-        Bpair lp = isBal(node.left);
-        Bpair rp = isBal(node.right);
+        DiaPair lp = diameterBetter(node.left);
+        DiaPair rp = diameterBetter(node.right);
+        DiaPair mp = new DiaPair();
 
-        Bpair mp = new Bpair();
-        mp.isBal = Math.abs(lp.height - rp.height) <= 1 && lp.isBal && rp.isBal;
         mp.height = Math.max(lp.height, rp.height) + 1;
+
+        int factor = lp.height + rp.height + 2;
+
+        mp.dia = Math.max(Math.max(lp.dia, rp.dia), factor);
+
         return mp;
     }
 
@@ -132,15 +141,15 @@ public class IsBalanced {
         }
 
         Node root = construct(arr);
-        // display(root);
 
-        balHeight(root);
-        System.out.println("Approach 1: " + is_balanced);
+        int diameter = 0;
+        // O(n)*O(n)(height)=>o(n^2)
+        diameter = diameter1(root);
+        System.out.println("Nested Recursive calls : " + diameter);
 
-        // Using pair
-        Bpair res = isBal(root);
-        System.out.println("Approach 2 :" + res.isBal);
-
+        // O(N)
+        DiaPair res = diameterBetter(root);
+        System.out.println("Using Pairs " + res.dia);
     }
 
 }

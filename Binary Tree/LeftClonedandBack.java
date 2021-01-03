@@ -1,7 +1,7 @@
 import java.io.*;
 import java.util.*;
 
-public class IsBalanced {
+public class LeftClonedandBack {
     public static class Node {
         int data;
         Node left;
@@ -79,43 +79,32 @@ public class IsBalanced {
         display(node.right);
     }
 
-    static boolean is_balanced = true;
-
-    public static int balHeight(Node node) {
+    public static Node createLeftCloneTree(Node node) {
         if (node == null)
-            return 0;
+            return null;
 
-        int lh = balHeight(node.left);
-        int rh = balHeight(node.right);
-
-        if (Math.abs(lh - rh) > 1)
-            is_balanced = false;
-        // ternary not working here
-        // is_balanced = Math.abs(lh-rh) > 1 ? false:true;
-
-        return Math.max(lh, rh) + 1;
+        Node lst = createLeftCloneTree(node.left); // left call
+        Node rst = createLeftCloneTree(node.right); // right call
+        Node cp = new Node(node.data, node.left, null); // created a new node with left pointing to same node
+        node.left = cp; // updated it's own left to new node -> right being unchabged
+        node.right = rst; // not needed to write explicitly
+        return node;
     }
 
-    static class Bpair {
-        int height;
-        boolean isBal;
-    }
+    public static Node leftClonedtoNormal(Node node) {
+        if (node == null)
+            return null;
+        // node.left.left -> bcz subtree is attached the root.left.left not directly on
+        // root.left
+        Node lst = transBackFromLeftClonedTree(node.left.left);
+        Node rst = transBackFromLeftClonedTree(node.right);
 
-    static Bpair isBal(Node node) {
-        if (node == null) {
-            Bpair base = new Bpair();
-            base.height = 0;
-            base.isBal = true;
-            return base;
-        }
+        node.left = node.left.left;
+        node.right = rst;
 
-        Bpair lp = isBal(node.left);
-        Bpair rp = isBal(node.right);
+        return node;
 
-        Bpair mp = new Bpair();
-        mp.isBal = Math.abs(lp.height - rp.height) <= 1 && lp.isBal && rp.isBal;
-        mp.height = Math.max(lp.height, rp.height) + 1;
-        return mp;
+        return node;
     }
 
     public static void main(String[] args) throws Exception {
@@ -132,15 +121,8 @@ public class IsBalanced {
         }
 
         Node root = construct(arr);
-        // display(root);
-
-        balHeight(root);
-        System.out.println("Approach 1: " + is_balanced);
-
-        // Using pair
-        Bpair res = isBal(root);
-        System.out.println("Approach 2 :" + res.isBal);
-
+        root = createLeftCloneTree(root);
+        display(root);
     }
 
 }

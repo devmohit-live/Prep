@@ -1,7 +1,7 @@
 import java.io.*;
 import java.util.*;
 
-public class IsBalanced {
+public class Main {
     public static class Node {
         int data;
         Node left;
@@ -79,43 +79,47 @@ public class IsBalanced {
         display(node.right);
     }
 
-    static boolean is_balanced = true;
+    static ArrayList<Node> res;
 
-    public static int balHeight(Node node) {
+    private static boolean find(Node node, int data) {
         if (node == null)
-            return 0;
+            return false;
 
-        int lh = balHeight(node.left);
-        int rh = balHeight(node.right);
-
-        if (Math.abs(lh - rh) > 1)
-            is_balanced = false;
-        // ternary not working here
-        // is_balanced = Math.abs(lh-rh) > 1 ? false:true;
-
-        return Math.max(lh, rh) + 1;
-    }
-
-    static class Bpair {
-        int height;
-        boolean isBal;
-    }
-
-    static Bpair isBal(Node node) {
-        if (node == null) {
-            Bpair base = new Bpair();
-            base.height = 0;
-            base.isBal = true;
-            return base;
+        if (node.data == data) {
+            res.add(node);
+            return true;
         }
 
-        Bpair lp = isBal(node.left);
-        Bpair rp = isBal(node.right);
+        if (find(node.left, data)) {
+            res.add(node);
+            return true;
+        }
 
-        Bpair mp = new Bpair();
-        mp.isBal = Math.abs(lp.height - rp.height) <= 1 && lp.isBal && rp.isBal;
-        mp.height = Math.max(lp.height, rp.height) + 1;
-        return mp;
+        if (find(node.right, data)) {
+            res.add(node);
+            return true;
+        }
+
+        return false;
+    }
+
+    private static void kld(Node node, int k, Node blocker) {
+        if (node == null || node == blocker || k < 0)
+            return;
+        if (k == 0) {
+            System.out.println(node.data);
+        }
+        kld(node.left, k - 1, blocker);
+        kld(node.right, k - 1, blocker);
+    }
+
+    public static void printKNodesFar(Node node, int data, int k) {
+        res = new ArrayList<Node>();
+        find(node, data);
+
+        for (int i = 0; i < res.size() && i <= k; i++) {
+            kld(res.get(i), k - i, i == 0 ? null : res.get(i - 1));
+        }
     }
 
     public static void main(String[] args) throws Exception {
@@ -131,16 +135,11 @@ public class IsBalanced {
             }
         }
 
+        int data = Integer.parseInt(br.readLine());
+        int k = Integer.parseInt(br.readLine());
+
         Node root = construct(arr);
-        // display(root);
-
-        balHeight(root);
-        System.out.println("Approach 1: " + is_balanced);
-
-        // Using pair
-        Bpair res = isBal(root);
-        System.out.println("Approach 2 :" + res.isBal);
-
+        printKNodesFar(root, data, k);
     }
 
 }

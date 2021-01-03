@@ -1,7 +1,7 @@
 import java.io.*;
 import java.util.*;
 
-public class IsBalanced {
+public class LargestBstSubtree {
     public static class Node {
         int data;
         Node left;
@@ -79,42 +79,46 @@ public class IsBalanced {
         display(node.right);
     }
 
-    static boolean is_balanced = true;
+    static class BstPair {
+        int min, max;
+        boolean isBst;
 
-    public static int balHeight(Node node) {
-        if (node == null)
-            return 0;
-
-        int lh = balHeight(node.left);
-        int rh = balHeight(node.right);
-
-        if (Math.abs(lh - rh) > 1)
-            is_balanced = false;
-        // ternary not working here
-        // is_balanced = Math.abs(lh-rh) > 1 ? false:true;
-
-        return Math.max(lh, rh) + 1;
+        Node lbst_node;
+        int lbst_size;
     }
 
-    static class Bpair {
-        int height;
-        boolean isBal;
-    }
+    public static BstPair isBst(Node node) {
 
-    static Bpair isBal(Node node) {
         if (node == null) {
-            Bpair base = new Bpair();
-            base.height = 0;
-            base.isBal = true;
-            return base;
+            BstPair bs = new BstPair();
+            bs.min = Integer.MAX_VALUE;
+            bs.max = Integer.MIN_VALUE;
+            bs.isBst = true;
+
+            bs.lbst_node = null;
+            bs.lbst_size = 0;
+            return bs;
         }
 
-        Bpair lp = isBal(node.left);
-        Bpair rp = isBal(node.right);
+        BstPair lp = isBst(node.left);
+        BstPair rp = isBst(node.right);
+        BstPair mp = new BstPair();
 
-        Bpair mp = new Bpair();
-        mp.isBal = Math.abs(lp.height - rp.height) <= 1 && lp.isBal && rp.isBal;
-        mp.height = Math.max(lp.height, rp.height) + 1;
+        mp.isBst = (lp.isBst && rp.isBst) && (lp.max <= node.data && node.data <= rp.min);
+        mp.min = Math.min(Math.min(lp.min, rp.min), node.data);
+        mp.max = Math.max(Math.max(lp.max, rp.max), node.data);
+
+        if (mp.isBst) {
+            mp.lbst_size = lp.lbst_size + rp.lbst_size + 1;
+            mp.lbst_node = node;
+        } else if (lp.lbst_size > rp.lbst_size) {
+            mp.lbst_size = lp.lbst_size;
+            mp.lbst_node = lp.lbst_node;
+        } else {
+            mp.lbst_size = rp.lbst_size;
+            mp.lbst_node = rp.lbst_node;
+        }
+
         return mp;
     }
 
@@ -132,14 +136,9 @@ public class IsBalanced {
         }
 
         Node root = construct(arr);
-        // display(root);
 
-        balHeight(root);
-        System.out.println("Approach 1: " + is_balanced);
-
-        // Using pair
-        Bpair res = isBal(root);
-        System.out.println("Approach 2 :" + res.isBal);
+        BstPair res = isBst(root);
+        System.out.println(res.lbst_node.data + "@" + res.lbst_size);
 
     }
 
