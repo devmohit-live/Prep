@@ -1,11 +1,19 @@
 import java.util.*;
 import java.math.BigInteger;
 
+/***
+ * Link for BI:
+ * https://www.codespeedy.com/factorial-of-a-large-number-using-biginteger-in-java/
+ * 
+ */
 public class LargeFactorial {
 
     private static BigInteger factorial(int n) {
         BigInteger f = new BigInteger("1");
+        // constructor for strings
+
         for (int i = 2; i <= n; i++) {
+            // ob.multiply(BigInteger.vaueOf(int))
             f = f.multiply(BigInteger.valueOf(i));
         }
         return f;

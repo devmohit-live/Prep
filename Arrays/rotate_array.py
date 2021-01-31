@@ -6,7 +6,6 @@ we remove the first nr elements from the front and add the newarr elements at la
 
 '''
 
-
 def simple(l, d) -> list:
     nr = d % len(l)
     k = l[:nr]
@@ -34,7 +33,6 @@ def better_approach(l, d):
     reverse(l, nr, len(l)-1)  # rest part
     reverse(l, 0, len(l)-1)  # complete array
     print(l)
-
 
 t = int(input('Enter test cases numbers: '))
 for _ in range(t):
