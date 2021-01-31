@@ -1,7 +1,6 @@
-import java.util.Scanner;
+import java.util.*;
 
 public class KMP {
-
     /**
      * @author : devmohit-live
      * 
@@ -45,16 +44,16 @@ public class KMP {
     }
 
     public static int kmp(String text, String pat) {
-        int plen = pat.length();
         int count = 0;
         String s = pat + "#" + text;
-        int[] arr = lps(s);
+        int[] res = Arrays.copyOfRange(lps(s), pat.length(), s.length());
+        // to get the actual aray as original array also contains the pattern and #
         System.out.println("lps:");
-        for (int i = 0; i < arr.length; i++) {
-            System.out.print(arr[i] + " ");
-            if (arr[i] == plen)
+        for (int i = 0; i < res.length; i++)
+            if (res[i] == pat.length()) {
+                System.out.println("pattern found at index: " + (i - pat.length()));
                 count++;
-        }
+            }
         return count;
     }
 
