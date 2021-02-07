@@ -19,7 +19,7 @@ public class PowerfulNumbers {
         HashSet<Integer> set = new HashSet<>();
 
         for (int i = 1; i < bound; i *= x) { // logx(bound)
-            for (int j = 1; i + j < bound; j *= y) { // logy(bound)
+            for (int j = 1; j < bound; j *= y) { // logy(bound)
                 if (y == 1)
                     break;
 
