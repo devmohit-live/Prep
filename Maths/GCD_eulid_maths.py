@@ -2,7 +2,15 @@ def gcd(a, b) -> int:
     if a % b == 0:
         return b
     return gcd(b, a % b)
+# other implemetation of lcm:
 
+def lcm(a,b):
+    temp=max(a,b)
+    while(temp % a != 0 or temp % b != 0):
+        temp=temp+1
+    return temp
+
+print(lcm(5,15))
 
 t = int(input())
 for _ in range(t):
