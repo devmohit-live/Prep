@@ -19,9 +19,11 @@ public class FenwickTree {
 
         int q = Integer.parseInt(br.readLine());
 
-        // preprocess
-        preprocess(fen);
+        // // preprocess O(nlogn)
+        // preprocess(fen);
 
+        // preprocess O(n)
+        preprocessON();
         // executing queries
         for (int i = 0; i < q; i++) {
             String[] lr = br.readLine().split(" ");
@@ -57,7 +59,7 @@ public class FenwickTree {
         return sum;
     }
 
-    // nlogn
+    // O(nlogn)
     private static void preprocess(int[] fen) {
         for (int i = 1; i < arr.length; i++) {
             update(i, arr[i]);
@@ -69,6 +71,21 @@ public class FenwickTree {
         while (n < fen.length) {
             fen[n] += delta;
             n += (n & -n);
+        }
+    }
+
+    // here we also use prefixsum array to create fenwick array to create fenwick
+    // array in O(N)
+    private static void preprocessON() {
+        int[] prefix = new int[arr.length];
+        // 1 based
+        prefix[1] = arr[1];
+        for (int i = 2; i < arr.length; i++) {
+            prefix[i] = prefix[i - 1] + arr[i];
+        }
+        for (int i = 1; i < fen.length; i++) {
+            int idx = i - (i & -i);
+            fen[i] = prefix[i] - prefix[idx];
         }
     }
 
