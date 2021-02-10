@@ -52,6 +52,7 @@ public class Josephus {
         System.out.println(a.get(i));
     }
 
+    // o based indexing
     static int killPerson(int n, int k) {
         if (n == 1) // only 1 person left
             return 0;
@@ -61,4 +62,12 @@ public class Josephus {
         // have to re-traslate it to actual index, y expression does that for us
         return y; // that's how indexes are changed
     }
+
+    /*
+     * gfg
+     * 
+     * 1 based indexing: if (n == 1) return 1;
+     * 
+     * return (josephus(n-1,k) +k-1)%n +1;
+     */
 }
