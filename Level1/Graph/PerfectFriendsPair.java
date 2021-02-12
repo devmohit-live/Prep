@@ -73,3 +73,67 @@ public class PerfectFriendsPair {
     }
 
 }
+
+// // GFG Way
+
+// import java.io.*;
+// import java.util.*;
+
+// public class PerfectFriendsPair {
+
+// static int size = 0;
+
+// private static void addEdge(ArrayList<ArrayList<Integer>> adj, int u, int v)
+// {
+// adj.get(u).add(v);
+// adj.get(v).add(u);
+// }
+
+// private static int dfsUtil(ArrayList<ArrayList<Integer>> adj, boolean[]
+// visited, int src, int size) {
+// visited[src] = true;
+
+// for (int e : adj.get(src)) {
+// if (!visited[e]) {
+// return dfsUtil(adj, visited, e, size + 1);
+// }
+// }
+// return size;
+// }
+
+// public static void main(String[] args) throws Exception {
+// BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+// int n = Integer.parseInt(br.readLine());
+// int k = Integer.parseInt(br.readLine());
+// ArrayList<ArrayList<Integer>> adj = new ArrayList<>(n);
+// for (int i = 0; i < n; i++)
+// adj.add(new ArrayList<Integer>());
+
+// for (int i = 0; i < k; i++) {
+// String edge[] = br.readLine().split(" ");
+// addEdge(adj, Integer.parseInt(edge[0]), Integer.parseInt(edge[1]));
+// }
+
+// boolean[] visited = new boolean[n];
+// int connected_comps = 0;
+// ArrayList<Integer> comp = new ArrayList<>();
+// for (int i = 0; i < n; i++) {
+// if (!visited[i]) {
+// size = 1; // clear previos value
+// size = dfsUtil(adj, visited, i, size);
+// comp.add(size);
+// }
+// }
+// long res = 0;
+// for (int i = 0; i < comp.size(); i++) {
+// for (int j = i + 1; j < comp.size(); j++) {
+// res = res + comp.get(i) * comp.get(j);
+// }
+// }
+
+// System.out.println(res);
+// // System.out.println(comp);
+
+// }
+
+// }
