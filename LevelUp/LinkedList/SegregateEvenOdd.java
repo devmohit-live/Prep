@@ -1,10 +1,6 @@
-public class SegregateEvenOdd {
-    
-}
-
 import java.util.*;
 
-class Main {
+class SegregateEvenOdd {
     public static class ListNode {
         int val = 0;
         ListNode next = null;
