@@ -2,6 +2,10 @@ import java.util.Scanner;
 
 public class PascalTriangle {
     /**
+     * Prop represented by pascal triangle:
+     * https://www.youtube.com/watch?v=XMriWTvPXHI
+     * 
+     * 
      * Useful in finding coeffcients in binomial expansion
      * 
      * Useful in finding combinations in form of: nCr ex: no of ways in which tails
@@ -9,7 +13,24 @@ public class PascalTriangle {
      * 
      * for r>> use this concept : nCr = nCn-r
      * 
+     * sample space: 2^n => or addition of row elements
+     * 
      * 0 row and col represents 0 selection pascal[0][0]=1, pascal[i][j]=1 for i==j
+     * 
+     * 
+     * Pascal Triangle can also be stated as 11^x x=>[0,n]: can be useful when you
+     * directly wanted to print the ith row of pascal triangle: Using
+     * BigInteger.multiply() => toString
+     * 
+     * 1 => 11^0
+     * 
+     * 1 1 => 11^1
+     * 
+     * 1 2 1 => 11^2
+     * 
+     * 
+     * Another way of directly printing the ith row of pascal triangle is :
+     * https://www.youtube.com/watch?v=6FLvhQjZqvM
      */
 
     static long[][] pascal = new long[1000][1000]; // contrains in case of range queries of r,c acc to question
@@ -40,9 +61,18 @@ public class PascalTriangle {
         System.out.print("No of ways of getting 2 tails on a toss of 6 coins : ");
         // 6c2 => pascal[6][2];
         System.out.println(pascal[6][2]);
-        System.out.println("Probability of getting 2 tails in toss of 6 coins " + ((pascal[6][2] * 1.0) / (6 * 6)));
-
+        System.out.println(
+                "Probability of getting 2 tails in toss of 6 coins " + ((pascal[6][2] * 1.0) / Math.pow(2, 6)));
+        // sample space: 2^n => or addition of row elements
         System.out.println("4th coefficient's value in (a+b)^8 " + pascal[8][4]);
+
+        System.out.println("Sum of 3rd row : " + Math.pow(2, 3));
+        System.out.print("Sum of 3rd row : ");
+        int sm = 0;
+        for (int i = 0; i <= 3; i++) {
+            sm += pascal[3][i];
+        }
+        System.out.println(sm);
 
         // max coefficient :
         /**
@@ -72,6 +102,11 @@ public class PascalTriangle {
             System.out.println("Max value of coefficient is: " + n + "C" + r + " with value of " + pascal[n][r]);
         }
         sc.close();
+    }
+
+    static void createPascalEfficient() {
+        // using property ncr = ncn-r
+
     }
 
 }
