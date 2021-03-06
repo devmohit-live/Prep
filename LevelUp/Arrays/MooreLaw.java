@@ -27,6 +27,7 @@ public class MooreLaw {
     }
 }
 
+// Leetcode 169
 class Solution {
     public int majorityElement(int[] nums) {
 

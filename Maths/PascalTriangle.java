@@ -74,6 +74,8 @@ public class PascalTriangle {
         }
         System.out.println(sm);
 
+        System.out.print("no of ways of selecting 2 boys and 3 girls from group of 5 students ");
+        System.out.println(pascal[5][2] * 1.0);
         System.out.print("probab of selecting 2 boys and 3 girls from group of 5 students ");
         // 2boys and 3 girls => x^2 and y^3 in (x+y)^5 ie r=2 as x^2
         System.out.println((pascal[5][2] * 1.0) / Math.pow(2, 5));
