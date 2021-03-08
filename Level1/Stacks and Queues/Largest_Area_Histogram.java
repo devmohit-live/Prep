@@ -34,7 +34,7 @@ public class Largest_Area_Histogram {
         }
         nse = new Stack<Integer>();
         // nse on right initially arr.length
-        nse.push(n - 1);
+        nse.push(n - 1);// TODO: check todo1
         right[n - 1] = n;
         for (int i = n - 2; i >= 0; i--) {
             while (nse.size() > 0 && a[i] <= a[nse.peek()]) {

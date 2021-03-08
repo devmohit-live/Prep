@@ -1,6 +1,7 @@
 import java.io.*;
 import java.util.*;
 
+// LeetCode similar => 3sum
 class QuadrpuleSum {
     /** Approach 1: With n generic functions */
     public static void createRes(ArrayList<ArrayList<Integer>> res, ArrayList<ArrayList<Integer>> smaller, int val) {
@@ -24,7 +25,7 @@ class QuadrpuleSum {
                 ei--;
                 while (si < ei && nums[si] == nums[si - 1])
                     si++;
-                while (nums[ei] == nums[ei + 1])
+                while (si < ei && nums[ei] == nums[ei + 1]) // or ei>0
                     ei--;
             }
         }
@@ -60,6 +61,7 @@ class QuadrpuleSum {
         return res;
     }
 
+    // Optimizing the creation of result
     /** Approach 2: In a single fx */
     public static ArrayList<ArrayList<Integer>> fourSum2(int[] nums, int target, int n) {
         Arrays.sort(nums);
@@ -69,13 +71,14 @@ class QuadrpuleSum {
         for (int i = 0; i < n; i++) {
             if (i != 0 && nums[i] == nums[i - 1])
                 continue;
-
+            // for 3sum
             for (int j = i + 1; j < n; j++) {
                 if (j != i + 1 && nums[j] == nums[j - 1])
                     continue;
 
                 int si = j + 1;
                 int ei = n - 1;
+                // for 2 sum
                 while (si < ei) {
                     int sum = nums[i] + nums[j] + nums[si] + nums[ei];
                     if (sum > target)
@@ -83,10 +86,12 @@ class QuadrpuleSum {
                     else if (sum < target)
                         si++;
                     else {
-
+                        // result creation
                         res.add(new ArrayList(Arrays.asList(nums[i], nums[j], nums[si], nums[ei])));
                         si++;
                         ei--;
+
+                        // checking for duplicates(skipping duplicates)
                         while (si < ei && nums[si] == nums[si - 1])
                             si++;
                         while (si < ei && nums[ei] == nums[ei + 1])

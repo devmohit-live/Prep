@@ -36,11 +36,12 @@ class Solution {
         // finding the number from where to start filling the blanks(_)
         // which number from the set to be choosen to fill the blank (1 at a time => 1
         // at each iteration)
-        // ex: {1,2,3,4}=> ? _ _ _ ans : ?=4
+        // ex: {1,2,3,4}=> ? _ _ _ ans:=3
         // : {1,2,4}=> 3 ? _ _ ans: ?=4
         // : {1,2}=> 3 4 ? _ ans:?=1
         // {1} => 3 4 1 ? ans:1
         // {} => break
+
         while (true) {
             // find the index
             int lookup = k / fact;

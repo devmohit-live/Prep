@@ -1,6 +1,6 @@
-''' Given an array of walls of height i , How much water can be trapped insise the walls
+''' Given an array of walls of height i , How much water can be trapped inside the walls
 ie sum of all the water between all the walls
-approach to find water bw 2 walls is => min(max(walls to the ledt of i),max(walls to the right of i))
+approach to find water bw 2 walls is => min(max(walls to the left of i),max(walls to the right of i))
 ex: [3,0,1,2,5] => 6
 [2,0,2] => 2
 '''
