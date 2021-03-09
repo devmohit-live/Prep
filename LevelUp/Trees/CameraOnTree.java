@@ -1,6 +1,8 @@
 public class CameraOnTree {
-    // test cases
+    // Time: O(N)
+    // Space: O(1)
 
+    // test cases
     // [0,0,null,0,0]
     // [0,0,null,0,null,0,null,null,0]
 
