@@ -6,7 +6,7 @@ import java.util.*;
  */
 public class CopyListWithRandomPointer {
     // Time:O(N),space:O(N)
-    public Node copyRandomList(Node head) {
+    public static Node copyRandomList(Node head) {
         Node newhead = new Node(-1);
         Node cp = newhead;
         Node tmp = head;
@@ -25,6 +25,9 @@ public class CopyListWithRandomPointer {
 
         while (tmp != null) {
             Node random = tmp.random;
+            // System.out.println(random + " " + map.get(random));
+            // map.get(null)=> null , so null cases is handled automatically eyt you can
+            // write an extra if case for it
             Node pointingto = map.get(random);
             cp.random = pointingto;
 
@@ -60,7 +63,7 @@ public class CopyListWithRandomPointer {
 
         tmp = head;
         cp = newhead.next;
-        Node copy = nwehead.next;
+        Node copy = newhead.next;
 
         while (tmp != null) {
             Node random = tmp.random;
@@ -83,6 +86,36 @@ public class CopyListWithRandomPointer {
         }
 
         return newhead.next;
+    }
+
+    public static void main(String[] args) {
+        Scanner scn = new Scanner(System.in);
+        int n = scn.nextInt();
+
+        Node[] arr = new Node[n];
+        Node prev = null;
+
+        for (int i = 0; i < n; i++) {
+            arr[i] = new Node(0);
+            if (prev != null)
+                prev.next = arr[i];
+            prev = arr[i];
+        }
+
+        for (int i = 0; i < n; i++) {
+            int val = scn.nextInt();
+            int idx = scn.nextInt();
+
+            arr[i].val = val;
+            if (idx != -1)
+                arr[i].random = arr[idx];
+        }
+
+        Node head = copyRandomList(arr[0]);
+        while (head != null) {
+            System.out.print("(" + head.val + ", " + (head.random != null ? head.random.val : -1) + ") ");
+            head = head.next;
+        }
     }
 }
 
