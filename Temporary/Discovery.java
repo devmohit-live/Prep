@@ -22,7 +22,8 @@ import java.util.Collections;
 public class Discovery {
 
     public static void main(String[] args) {
-        double question[][] = { { 14, 16 }, { 15, 15 }, { 16, 14 }, { 16.59, 14 }, { 15, 14.50 }, { 16.69, 12.35 } };
+        double question[][] = { { 14, 16 }, { 15, 15 }, { 16, 14 }, { 16.59, 14 }, { 15, 14.50 }, { 16.69, 12.35 },
+                { 259.63, 23.1 } };
         for (double[] q : question) {
             solve(q[1], q[0]);
         }
