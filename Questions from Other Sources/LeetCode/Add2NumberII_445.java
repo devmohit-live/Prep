@@ -4,7 +4,7 @@
  * ListNode next) { this.val = val; this.next = next; } }
  */
 class Add2NumberII_445 {
-    public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+    public ListNode addTwoNumbers1(ListNode l1, ListNode l2) {
 
         if (l1 == null || l2 == null)
             return l1 != null ? l1 : l2;
@@ -50,6 +50,63 @@ class Add2NumberII_445 {
 
         return prev;
 
+    }
+
+    public ListNode addTwoNumbers2(ListNode l1, ListNode l2) {
+        // when reverse isn't allowed
+        if (l1 == null || l2 == null)
+            return l1 != null ? l1 : l2;
+        int ll1 = length(l1);
+        int ll2 = length(l2);
+        int c = recursionAddition(l1, l2, ll1, ll2, result);
+        if (c > 0) {
+            addFirst(c);
+        }
+
+        return result;
+    }
+
+    private int recursionAddition(ListNode c1, ListNode c2, int pv1, int pv2, ListNode result) {
+        int oc = 0;
+        int data = 0;
+        int nc = 0;
+        if (pv1 == 0 && pv2 == 0) {
+            return 0;
+        } else if (pv1 > pv2) {
+            // list1 is bigger in size
+            oc = recursionAddition(c1.next, c2, pv1 - 1, pv2, result);
+            data = oc + c1.val;
+        } else if (pv2 > pv1) {
+            // list2 is bigger in size
+            oc = recursionAddition(c1, c2.next, pv1, pv2 - 1, result);
+            data = oc + c2.val;
+        } else {
+            // go to minimum place value //lsb
+            oc = recursionAddition(c1.next, c2.next, pv1 - 1, pv2 - 1, result);
+            data = oc + c1.val + c2.val;
+        }
+        nc = data / 10;
+        data = data % 10;
+        // addFirst-> lsb addtion -> to -> msb addition => msb addition(last in
+        // recursion) should appear at msb(first)
+        addFirst(data);
+        return nc;
+
+    }
+
+    private int length(ListNode node) {
+        int len = 0;
+        while (node != null) {
+            len++;
+            node = node.next;
+        }
+        return len;
+    }
+
+    private void addFirst(int data) {
+        ListNode node = new ListNode(data);
+        node.next = result;
+        result = node;
     }
 
 }
