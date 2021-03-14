@@ -21,7 +21,3 @@ public class FourtSumII_454 {
         return count;
     }
 }
-
-class FourSumII_454 {
-
-}
