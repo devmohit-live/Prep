@@ -1,4 +1,5 @@
 public class UglyNumber {
+    // Leetcode 264
     public static void main(String[] args) {
         // 1<=k<=200
 
@@ -27,7 +28,7 @@ public class UglyNumber {
         int count = 6; // already settled 6 uglyNumbers
         int i = 6;
         /**
-         * or simlpy start with count=1 and i=2 as k=1 1 is an exceptional case ugly
+         * or simlpy start with count=1 and i=1 as k=1 1 is an exceptional case ugly
          * number
          */
         while (count < k) {

@@ -1,18 +1,17 @@
 // GFG Article on set union for finding a nth number divisible by a or b or c : https://www.geeksforgeeks.org/find-the-nth-term-divisible-by-a-or-b-or-c/
-
+// Leetcode 1201
 //Using constraints
-public class Solution {
+class Solution {
     public int nthUglyNumber(int n, int a, int b, int c) {
-        int ab = lcm(a, b);
-        int bc = lcm(b, c);
-        int ca = lcm(c, a);
-        int abc = lcm(ab, c);
+        long ab = lcm(a, b);
+        long bc = lcm(b, c);
+        long ca = lcm(c, a);
+        long abc = lcm(ab, c);
 
-        int s = 1, e = 2000000000, m;
-        int x;
+        long s = 1, e = 2000000000, m;
+        long x;
         while (s < e) {
             m = s / 2 + e / 2 + (s % 2 + e % 2) / 2;
-            // unioun a,b,c = a+b+c -ab -bc-ca +abc
             x = m / a + m / b + m / c - m / ab - m / bc - m / ca + m / abc;
             if (x >= n)
                 e = m;
@@ -20,24 +19,23 @@ public class Solution {
                 s = m + 1;
         }
 
-        return s;
+        return (int) (s);
     }
 
-    public int lcm(int a, int b) {
-        if (a == Integer.MAX_VALUE || b == Integer.MAX_VALUE)
-            return Integer.MAX_VALUE;
-        int gcd = gcd(a, b);
-        if (Integer.MAX_VALUE / (a / gcd) < b)
-            return Integer.MAX_VALUE;
-        return a / gcd * b;
+    private long lcm(long a, long b) {
+        return a * b / gcd(a, b);
     }
 
-    public int gcd(int a, int b) {
+    private long gcd(long a, long b) {
         if (b == 0)
             return a;
-        return gcd(b, a % b);
+        if (a < b)
+            return gcd(b, a);
+        return gcd(a % b, b);
+
     }
 }
+
 // explation 1:
 // The idea here is to find the nth number divisible by a, or b or c and then
 // checking if that number is divisble by the given n if it is then it is the
