@@ -20,14 +20,13 @@ class Countdown {
             for (int i = 0; i < arr.length; i++) {
                 if (arr[i] == k) {
                     int x = k;
-                    for (int a = i; a < i + k; i++) {
-                        if (arr[a] == x) {
+                    for (int j = i; j < i + k; j++) {
+                        if (arr[j] == x) {
                             x--;
                         } else {
                             break;
                         }
                     }
-
                     if (x == 0) {
                         output++;
                     }
