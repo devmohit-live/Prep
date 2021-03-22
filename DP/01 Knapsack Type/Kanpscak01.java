@@ -68,6 +68,7 @@ public class Kanpscak01 {
                 } else {
                     // max of both the choices
                     dp[i][j] = Math.max(dp[i - 1][j], val[i - 1] + dp[i - 1][j - wt[i - 1]]);
+                    // val[n-1] + wt[n-1] just as memo
                 }
             }
         }
