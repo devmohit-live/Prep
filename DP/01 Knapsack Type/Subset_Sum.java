@@ -8,8 +8,11 @@ public class Subset_Sum {
     static boolean dp[][];
 
     public static void main(String[] args) {
-        int[] arr = { 2, 3, 7, 8, 10 };
-        int sum = 11;
+        int[] arr = { 3, 34, 4, 12, 5, 2 };
+        // int[] arr = { 2, 3, 11, 8 }; //false
+
+        int sum = 9;
+        // int sum = 12;
         System.out.println("Tab : " + tabulation(arr, sum));
     }
 
