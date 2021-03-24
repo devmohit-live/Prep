@@ -37,6 +37,8 @@ public class RodCutting {
         for (int i = 0; i < n; i++)
             length[i] = i + 1; // not compulsory just making for comparison sake with unbounbded's wt array
 
+        // there are no resitriction on cuts so here length.length == n
+        // for other sinarion length < n
         int[][] dp = new int[n + 1][length.length + 1];
 
         // 0th row and col =0
