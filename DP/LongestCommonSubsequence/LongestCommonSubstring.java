@@ -1,11 +1,13 @@
+import java.util.*;
+
 public class LongestCommonSubstring {
     public static void main(String[] args) {
-        String s1 = "GeeksforGeeks", s2 = "GeeksQuiz"; // 5
-        // String s1 = "abcdxyz", s2 = "xyzabcd"; //4
+        // String s1 = "GeeksforGeeks", s2 = "GeeksQuiz"; // 5
+        String s1 = "abcdxyz", s2 = "xyzabcd"; // 4
         // String s1 = "zxabcdezy", s2 = "yzabcdezx"; //6
         int n = s1.length();
         int m = s2.length();
-        System.err.println("Length of longest Substring is : " + solve(s1, s2, n, m));
+        System.out.println("Length of longest Substring is : " + solve(s1, s2, n, m));
 
     }
 
@@ -35,7 +37,7 @@ public class LongestCommonSubstring {
                 ans = Math.max(dp[i][j], ans);
             }
         }
-
+        // Arrays.stream(dp).forEach(arr -> System.out.println(Arrays.toString(arr)));
         return ans;
     }
 }

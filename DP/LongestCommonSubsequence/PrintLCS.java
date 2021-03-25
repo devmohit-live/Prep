@@ -38,9 +38,9 @@ public class PrintLCS {
          * We just have to backtrack in dp based on highest value and from where that
          * value have came from
          */
-        int i = dp.length - 1;
-        int j = dp[0].length - 1;
-        while (i > 0 && j > 0) {
+        int i = dp.length - 1; // =n
+        int j = dp[0].length - 1; // =m
+        while (i > 0 && j > 0) { // none of the string should be empty
             // matched
             if (s1.charAt(i - 1) == s2.charAt(j - 1)) {
                 // characters will be appended only in case of match, for other cases the value
