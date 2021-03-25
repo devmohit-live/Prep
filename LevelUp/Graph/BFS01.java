@@ -2,6 +2,8 @@ import java.io.*;
 import java.util.*;
 
 /**
+ * *** QUESTION ***
+ * 
  * You are given 2 integers N and M , N is the number of vertices, M is the
  * number of edges. You'll also be given ai and bi where ai and bi represents an
  * edge from a vertex ai to a vertex bi.
@@ -23,6 +25,17 @@ import java.util.*;
  * incase the destination can't be reached even after reversing edge print -1
  */
 public class BFS01 {
+
+    // *** 01 MEANING *** :
+    // Here 01 means that when there is an edge give(u->v) we treat that edges
+    // weight as 0 and we create an reverse edge with weight 1, and we try to find
+    // the path from src to des with min edges.
+
+    // **** IDEA ****
+    // here we print the rem.wt => wt of node (cumulative) as in dijstra with pq =>
+    // since actual edges have wt 0 and reverse edges have weight 1, so if the total
+    // wt at end is non zero then it will be no of 1's added(which will actually be
+    // no. of reversed edges used/ no of edge reversal needed)
 
     static class Pair {
         int v;
