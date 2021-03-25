@@ -3,8 +3,12 @@ import java.util.*;
 
 public class Kosraju {
     /*
-     * Kosaraju's algo: Number of strongly connected components 1. dfs graph and
-     * push src at each call to stack at the end 2. create a new reverseedged grph
+     * Kosaraju's algo: Number of strongly connected components
+     * 
+     * 1. dfs graph and push src at each call to stack at the end
+     * 
+     * 2. create a new reverseedged grph
+     * 
      * 3. dfs the graph on based on stack order
      */
 
