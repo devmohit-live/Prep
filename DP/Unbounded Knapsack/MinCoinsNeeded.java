@@ -8,13 +8,17 @@ import java.util.*;
  */
 public class MinCoinsNeeded {
     public static void main(String[] args) {
-        // int coins[] = { 25, 10, 5 };
+        // int coins[] = { 25, 10, 5 }; //2
         // int sum = 30;
-        int coins[] = { 9, 6, 5, 1 };
+        int coins[] = { 9, 6, 5, 1 }; // 2
         int sum = 11;
-        // Output: Minimum 2 coins required
-
-        System.out.println("Min coins needed are " + tabulation(coins, sum));
+        // int[] coins = { 15 }; // not possible
+        // int sum = 4;
+        int ans = tabulation(coins, sum);
+        if (ans != -1)
+            System.out.println("Min coins needed are " + ans);
+        else
+            System.out.println("Not possible to pay the sum with current coins");
 
         // myapproach(coins, sum); // Fails in ceratin conditions
     }
@@ -54,7 +58,7 @@ public class MinCoinsNeeded {
         // Intialization:
 
         // 0th row: sum is varying and we have no coins , then how many coins are
-        // required => no answer => fill Integer.MAX_VALUE
+        // required => no answer => fill Integer.MAX_VALUE-1
 
         // Why Integer.Max -1 instead of just Integer.max => we are doing dp[i][j]+1 so
         // that can lead to overflow
@@ -62,10 +66,9 @@ public class MinCoinsNeeded {
         for (int i = 0; i < dp[0].length; i++)
             dp[0][i] = Integer.MAX_VALUE - 1;
 
-        // 0th col: sum is 0 and we have x coins x[nothing... all coins] for no coins it
-        // is Integer.MAX for others it is 0 as we don't need to pay any coins for 0
-        // sum(ways =1 , coins =0) so min coins =0 here
-        for (int i = 1; i < dp.length; i++)
+        // 0th col: sum is 0 then it is 0 as we don't need to pay any coins for 0
+        // sum(ways =1 , coins =0) so min coins =0 here,
+        for (int i = 0; i < dp.length; i++)
             dp[i][0] = 0;
 
         // 1st row => sum is varying , and we have only 1 coin(first one in array) =>
@@ -74,9 +77,14 @@ public class MinCoinsNeeded {
         // have multiple supplies of the coin so mincoin in that cae= Integer.MAX,
         // example: sum=9, coins={2}=> impossible
 
-        for (int i = 0; i < dp[0].length; i++) {
+        for (int i = 1; i < dp[0].length; i++) {
             // 1-1 => coins[1row-0]=? coins[0] first coins
-            dp[1][i] = (sum % coins[1 - 1]) == 0 ? (sum / coins[i]) : Integer.MAX_VALUE - 1;
+            // i=> corresponds to the sum =>
+            // can't use sum%i as sum corresponds to fixed sum and i corresponds to changing
+            // sum from [1..sum]
+
+            dp[1][i] = (i % coins[0]) == 0 ? (i / coins[0]) : Integer.MAX_VALUE - 1;
+
         }
 
         // based on unbounded knapsack code
@@ -98,17 +106,17 @@ public class MinCoinsNeeded {
          */
         for (int i = 2; i < dp.length; i++) { // 1st row already done
             for (int j = 1; j < dp[0].length; j++) {
-                if (coins[i - 1] > j) {
-                    dp[i][j] = dp[i - 1][j];
-                } else {
-                    int included = 1 + dp[i][j - coins[i - 1]];
+                if (coins[i - 1] <= j) {
+                    int included = dp[i][j - coins[i - 1]] + 1;
                     int excluded = dp[i - 1][j];
                     dp[i][j] = Math.min(included, excluded);
+                } else {
+                    dp[i][j] = dp[i - 1][j];
                 }
             }
         }
 
-        return dp[n][sum];
+        return dp[n][sum] == Integer.MAX_VALUE - 1 ? -1 : dp[n][sum];
     }
 
 }
