@@ -48,7 +48,6 @@ public class ScrambledString {
          * can't divide string into non empty on either side of a tree.
          *
          */
-
         // Generic Base Conditions.
         // If length of input String is not similar they can never be a substring of
         // each other.
@@ -87,24 +86,38 @@ public class ScrambledString {
         int length = A.length(); // -1 because 0 based index.
 
         for (int i = 1; i < length; i++) {
+          /**
+         * Okay now we have input which is not equal, so we have to try to divide them at i=0....to i < A.length()-1
+         * why <len-1 , since we have to keep at-least 1 child on either side so we will try upto only at the last character.
+         */
+        boolean scrambleStrings = false; // Initially assume they are not.
+        int length = A.length(); // -1 because 0 based index.
+
+        for (int i = 1; i < length; i++) {
             /**
              * Now when we are swapping strings:
              *
-             * G R E A T -----> T E A R G 0 1 2 3 4 0 1 2 3 4 if I Swap at i = 1
+             *          G R E A T       ----->   T E A R G
+             *          0 1 2 3 4                0 1 2 3 4
+             * if I Swap at i = 1
              *
-             * GREAT -------> TEARG / \ / \ GR EAT TEA RG
+             *             GREAT       ------->  TEARG
+             *            /    \                 /    \
+             *           GR    EAT             TEA    RG
              *
-             * We have to compare (GR)EAT --with--> TEA(RG) i.e GR of A is A scramble String
-             * of RG in B. and GR(EAT) ---with---> (TEA)RG i.e. EAT is a Scramble string of
-             * TEA.
+             *  We have to compare
+             *              (GR)EAT     --with-->  TEA(RG)   i.e GR of A is A scramble String of RG in B.
+             *  and         GR(EAT)    ---with---> (TEA)RG   i.e. EAT is a Scramble string of TEA.
              */
 
             /**
              * When we are not swapping the Strings.
              *
-             * then at that time we have to compare: GREAT ------> GTEAR
+             * then at that time we have to compare:
+             *             GREAT     ------>      GTEAR
              *
-             * compare (G)REAT ----with----> (G)TEAR and compare G(REAT) --with---> G(TEAR).
+             *             compare (G)REAT ----with---->  (G)TEAR
+             *             and compare G(REAT) --with---> G(TEAR).
              */
             if ( // When Doing the Swap.
             (isScrambleStrings(A.substring(0, i), B.substring(length - i))
