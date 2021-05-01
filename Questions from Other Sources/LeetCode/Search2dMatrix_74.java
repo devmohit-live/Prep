@@ -1,6 +1,7 @@
 class Search2dMatrix_74 {
     // Search in 2d sorted matrix using Binary Search
-    // Time: log m + log n => O(log(m*n))
+    // Time: log m + log n => O
+    // (log(m*n))
     // space: O(1)
     public boolean searchMatrix(int[][] matrix, int target) {
         int row = binarySearchRow(matrix, target);
@@ -55,4 +56,21 @@ class Search2dMatrix_74 {
         return false;
     }
 
+    public boolean searchMatrixWithoutBinarySearch(int[][] matrix, int target) {
+        int j = matrix[0].length - 1;
+        int i = 0;
+
+        while (i >= 0 && i < matrix.length && j < matrix[0].length && j >= 0) {
+            if (matrix[i][j] == target)
+                return true;
+
+            if (target > matrix[i][j]) {
+                i++;
+            } else if (target < matrix[i][j]) {
+                j--;
+            }
+
+        }
+        return false;
+    }
 }
