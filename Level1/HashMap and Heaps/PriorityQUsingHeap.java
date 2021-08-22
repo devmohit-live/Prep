@@ -1,11 +1,7 @@
-public class PriorityQUsingHeap {
-    
-}
-
 import java.io.*;
 import java.util.*;
 
-public class Main {
+public class PriorityQUsingHeap {
 
     public static class PriorityQueue {
         ArrayList<Integer> data;
